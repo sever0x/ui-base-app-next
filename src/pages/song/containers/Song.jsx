@@ -52,11 +52,11 @@ const Song = () => {
         dispatch(actions.fetchUpdateSongById({updatedSongId, updatedSong}))
             .then(() => {
                 setCurrentMode(mode.view);
-                setSnackbarMessage("Norm");
+                setSnackbarMessage(formatMessage({ id: 'edit.success' }));
                 setSnackbarOpen(true);
             })
             .catch((error) => {
-                setSnackbarMessage("Error");
+                setSnackbarMessage(formatMessage({ id: 'edit.failure' }));
                 setSnackbarOpen(true);
             });
     };

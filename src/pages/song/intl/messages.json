@@ -17,5 +17,7 @@
   "error.required": "This field is required",
   "error.invalidGenres": "Genres value is invalid (specify commas if there are several of them)",
   "error.invalidReleaseYear": "Release year can't be greater than current year",
-  "error.invalidDuration": "Duration can't be less than 10 sec"
+  "error.invalidDuration": "Duration can't be less than 10 sec",
+  "edit.success": "Success",
+  "edit.failure": "Something wrong"
 }
