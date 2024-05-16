@@ -1,35 +1,12 @@
-import { createUseStyles } from 'react-jss';
 import React from 'react';
-import classNames from 'classnames';
-import useTheme from 'misc/hooks/useTheme';
+import {CardContent as CardContentMUI} from "@mui/material";
 
-const getClasses = createUseStyles(theme => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    overflowX: 'auto',
-  },
-  padding: {
-    padding: `${theme.spacing(0)}px ${theme.spacing(2)}px`,
-  },
-}));
-
-function CardContent({
-  children,
-  disablePadding = false,
-}) {
-  const { theme } = useTheme();
-  const classes = getClasses({ theme });
+const CardContent = ({ children, p = 2, ...restProps }) => {
   return (
-    <div
-      className={classNames(
-        classes.container,
-        disablePadding ? '' : classes.padding
-      )}
-    >
-      {children}
-    </div>
+      <CardContentMUI p={p} {...restProps}>
+        {children}
+      </CardContentMUI>
   );
-}
+};
 
 export default CardContent;

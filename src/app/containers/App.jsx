@@ -17,6 +17,8 @@ import LoginPage from 'pageProviders/Login';
 import PageContainer from 'pageProviders/components/PageContainer';
 import pageURLs from 'constants/pagesURLs';
 import SecretPage from 'pageProviders/Secret';
+import SongPage from 'pageProviders/Song';
+import CreatePage from 'pageProviders/Create';
 import ThemeProvider from 'misc/providers/ThemeProvider';
 import UserProvider from 'misc/providers/UserProvider';
 
@@ -78,6 +80,14 @@ function App() {
                     <Route
                       element={<SecretPage />}
                       path={`${pageURLs[pages.secretPage]}`}
+                    />
+                    <Route
+                        element={<SongPage />}
+                        path={`${pageURLs[pages.songPage]}/:songId`}
+                    />
+                    <Route
+                        element={<CreatePage />}
+                        path={`${pageURLs[pages.songPage]}/create`}
                     />
                     <Route
                       element={(

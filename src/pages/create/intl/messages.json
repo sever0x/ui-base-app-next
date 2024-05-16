@@ -1,0 +1,21 @@
+{
+  "title": "Title",
+  "album": "Album",
+  "released": "Released",
+  "genres": "Genres",
+  "about": "About",
+  "country": "Country",
+  "duration": "Duration (seconds)",
+  "btn.edit": "Edit",
+  "btn.save": "Save",
+  "btn.create": "Create",
+  "btn.cancel": "Cancel",
+  "unknown.artist": "Unknown artist",
+  "unknown.country": "Unknown country",
+  "song.create": "Create song",
+  "song.edit": "Edit song",
+  "error.required": "This field is required",
+  "error.invalidGenres": "Genres value is invalid (specify commas if there are several of them)",
+  "error.invalidReleaseYear": "Release year can't be greater than current year",
+  "error.invalidDuration": "Duration can't be less than 10 sec"
+}
