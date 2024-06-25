@@ -9,6 +9,9 @@ import {
   REQUEST_USER,
   SUCCESS_SIGN_IN,
   SUCCESS_SIGN_UP,
+  REQUEST_GOOGLE_SIGN_IN,
+  SUCCESS_GOOGLE_SIGN_IN,
+  ERROR_GOOGLE_SIGN_IN,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -40,15 +43,6 @@ export default function Reducer(state = initialState, action) {
         errors: convertErrors(action.payload),
         isFailedSignIn: true,
         isFetchingSignIn: false,
-      };
-    }
-
-    case ERROR_SIGN_UP: {
-      return {
-        ...state,
-        errors: convertErrors(action.payload),
-        isFailedSignUp: true,
-        isFetchingSignUp: false,
       };
     }
 
@@ -105,6 +99,31 @@ export default function Reducer(state = initialState, action) {
         isFetchingSignUp: true,
         isFailedSignUp: false,
       }
+    }
+
+    case REQUEST_GOOGLE_SIGN_IN: {
+      return {
+        ...state,
+        isFetchingSignIn: true,
+      };
+    }
+
+    case SUCCESS_GOOGLE_SIGN_IN: {
+      return {
+        ...state,
+        ...action.payload,
+        isAuthorized: true,
+        isFetchingSignIn: false,
+      };
+    }
+
+    case ERROR_GOOGLE_SIGN_IN: {
+      return {
+        ...state,
+        errors: convertErrors(action.payload),
+        isFailedSignIn: true,
+        isFetchingSignIn: false,
+      };
     }
 
     default: {

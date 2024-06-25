@@ -20,10 +20,10 @@ const checkAndInitializeMockData = () => {
 export const getSongList = (params) => {
     const { artistId, album, page, size } = params;
     const parameters = {
-        artistId: artistId ? artistId : null,
-        album: album ? album : null,
+        artistId: artistId || null,
+        album: album || null,
         page: page ? page - 1 : 0,
-        size: size ? size : 10,
+        size: size || 10,
     };
 
     return axios.post(`${REQUEST_URL}/_list`, parameters)

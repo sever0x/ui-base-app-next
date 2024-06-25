@@ -97,15 +97,7 @@ function App() {
                           isFailedSignUp={isFailedSignUp}
                           isFetchingSignIn={isFetchingSignIn}
                           isFetchingSignUp={isFetchingSignUp}
-                          onSignIn={({
-                            email,
-                            login,
-                            password,
-                          }) => dispatch(actionsUser.fetchSignIn({
-                            email,
-                            login,
-                            password,
-                          }))}
+                          onGoogleSignIn={() => dispatch(actionsUser.fetchGoogleSignIn())}
                           onSignUp={({
                             email,
                             firstName,
