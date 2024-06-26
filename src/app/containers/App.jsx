@@ -27,6 +27,7 @@ import Header from '../components/Header';
 import IntlProvider from '../components/IntlProvider';
 import MissedPage from '../components/MissedPage';
 import SearchParamsConfigurator from '../components/SearchParamsConfigurator';
+import ProtectedRoute from "../../pageProviders/components/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,58 +73,52 @@ function App() {
                   </PageContainer>
                 )}
                 {!isFetchingUser && (
-                  <Routes>
-                    <Route
-                      element={<DefaultPage />}
-                      path={`${pageURLs[pages.defaultPage]}`}
-                    />
-                    <Route
-                      element={<SecretPage />}
-                      path={`${pageURLs[pages.secretPage]}`}
-                    />
-                    <Route
-                        element={<SongPage />}
-                        path={`${pageURLs[pages.songPage]}/:songId`}
-                    />
-                    <Route
-                        element={<CreatePage />}
-                        path={`${pageURLs[pages.songPage]}/create`}
-                    />
-                    <Route
-                      element={(
-                        <LoginPage
-                          errors={errors}
-                          isFailedSignIn={isFailedSignIn}
-                          isFailedSignUp={isFailedSignUp}
-                          isFetchingSignIn={isFetchingSignIn}
-                          isFetchingSignUp={isFetchingSignUp}
-                          onGoogleSignIn={() => dispatch(actionsUser.fetchGoogleSignIn())}
-                          onSignUp={({
-                            email,
-                            firstName,
-                            lastName,
-                            login,
-                            password,
-                          }) => dispatch(actionsUser.fetchSignUp({
-                            email,
-                            firstName,
-                            lastName,
-                            login,
-                            password,
-                          }))}
-                        />
-                      )}
-                      path={`${pageURLs[pages.login]}`}
-                    />
-                    <Route
-                      element={(
-                        <MissedPage
-                          redirectPage={`${pageURLs[pages.defaultPage]}`}
-                        />
-                      )}
-                      path="*"
-                    />
-                  </Routes>
+                    <Routes>
+                      <Route
+                          path={pageURLs[pages.defaultPage]}
+                          element={<ProtectedRoute element={<DefaultPage />} />}
+                      />
+                      <Route
+                          path={pageURLs[pages.secretPage]}
+                          element={<ProtectedRoute element={<SecretPage />} />}
+                      />
+                      <Route
+                          path={`${pageURLs[pages.songPage]}/:songId`}
+                          element={<ProtectedRoute element={<SongPage />} />}
+                      />
+                      <Route
+                          path={`${pageURLs[pages.songPage]}/create`}
+                          element={<ProtectedRoute element={<CreatePage />} />}
+                      />
+                      <Route
+                          path={pageURLs[pages.login]}
+                          element={
+                            <LoginPage
+                                errors={errors}
+                                isFailedSignIn={isFailedSignIn}
+                                isFailedSignUp={isFailedSignUp}
+                                isFetchingSignIn={isFetchingSignIn}
+                                isFetchingSignUp={isFetchingSignUp}
+                                onGoogleSignIn={() => dispatch(actionsUser.fetchGoogleSignIn())}
+                                onSignUp={({ email, firstName, lastName, login, password }) =>
+                                    dispatch(
+                                        actionsUser.fetchSignUp({
+                                          email,
+                                          firstName,
+                                          lastName,
+                                          login,
+                                          password,
+                                        })
+                                    )
+                                }
+                            />
+                          }
+                      />
+                      <Route
+                          path="*"
+                          element={<MissedPage redirectPage={pageURLs[pages.defaultPage]} />}
+                      />
+                    </Routes>
                 )}
               </IntlProvider>
             )}
