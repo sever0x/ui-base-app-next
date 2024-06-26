@@ -1,6 +1,6 @@
 import axios from 'misc/requests';
 import config from 'config';
-import storage, {keys} from 'misc/storage';
+import Cookies from 'js-cookie';
 import {
   ERROR_SIGN_UP,
   RECEIVE_USER,
@@ -82,9 +82,7 @@ const fetchRefreshToken = () => (dispatch) => {
 };
 
 const fetchSignOut = () => (dispatch) => {
-  storage.removeItem(keys.TOKEN);
-  storage.removeItem(keys.TOKEN_EXPIRATION);
-  storage.removeItem('USER'); // TODO: Mocked code
+  Cookies.remove('SESSION-ID', { path: '/' });
   dispatch(requestSignOut());
 };
 

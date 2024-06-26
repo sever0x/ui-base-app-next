@@ -1,7 +1,6 @@
 import {
   ERROR_RECEIVE_USER,
   ERROR_SIGN_IN,
-  ERROR_SIGN_UP,
   RECEIVE_USER,
   REQUEST_SIGN_OUT,
   REQUEST_SIGN_IN,
@@ -46,7 +45,18 @@ export default function Reducer(state = initialState, action) {
       };
     }
 
-    case RECEIVE_USER:
+    case RECEIVE_USER: {
+      const user = action.payload;
+      return {
+        ...state,
+        email: user.email || initialState.email,
+        firstName: user.name || initialState.firstName,
+        isAuthorized: true,
+        isFetchingSignIn: false,
+        isFetchingUser: false,
+      }
+    }
+
     case SUCCESS_SIGN_IN: {
       const user = action.payload;
 

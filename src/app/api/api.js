@@ -18,7 +18,7 @@ const checkAndInitializeMockData = () => {
 }
 
 export const getSongList = (params) => {
-    const { artistId, album, page, size } = params;
+    const {artistId, album, page, size} = params;
     const parameters = {
         artistId: artistId || null,
         album: album || null,
@@ -26,7 +26,9 @@ export const getSongList = (params) => {
         size: size || 10,
     };
 
-    return axios.post(`${REQUEST_URL}/_list`, parameters)
+    return axios.post(`${REQUEST_URL}/_list`, parameters, {
+        withCredentials: true,
+    })
         .then(response => response)
         // TODO Mocked '.catch()' section
         .catch(() => {
@@ -36,7 +38,9 @@ export const getSongList = (params) => {
 };
 
 export const deleteSongById = (id) => {
-    return axios.delete(`${REQUEST_URL}/${id}`)
+    return axios.delete(`${REQUEST_URL}/${id}`, {
+        withCredentials: true,
+    })
         .then(response => response)
         // TODO Mocked '.catch()' section
         .catch(() => {
@@ -45,20 +49,22 @@ export const deleteSongById = (id) => {
             if (songIndex !== -1) {
                 const deletedSong = mockDataFromStorage.splice(songIndex, 1)[0];
                 saveMockData(mockDataFromStorage);
-                return { id: deletedSong.id, success: true };
+                return {id: deletedSong.id, success: true};
             }
         });
 };
 
 export const updateSongById = ({updatedSongId, updatedSong}) => {
-    return axios.put(`${REQUEST_URL}/${updatedSongId}`, updatedSong)
+    return axios.put(`${REQUEST_URL}/${updatedSongId}`, updatedSong, {
+        withCredentials: true,
+    })
         .then(response => response)
         // TODO Mocked '.catch()' section
         .catch(() => {
             const mockDataFromStorage = JSON.parse(storage.getItem('mockData'));
             const songIndex = mockDataFromStorage.findIndex(song => song.id === parseInt(updatedSongId));
             if (songIndex !== -1) {
-                mockDataFromStorage[songIndex] = { ...mockDataFromStorage[songIndex], ...updatedSong };
+                mockDataFromStorage[songIndex] = {...mockDataFromStorage[songIndex], ...updatedSong};
                 saveMockData(mockDataFromStorage);
                 return mockDataFromStorage[songIndex];
             }
@@ -66,7 +72,9 @@ export const updateSongById = ({updatedSongId, updatedSong}) => {
 }
 
 export const getSongById = (id) => {
-    return axios.get(`${REQUEST_URL}/${id}`)
+    return axios.get(`${REQUEST_URL}/${id}`, {
+        withCredentials: true,
+    })
         .then(response => response)
         // TODO Mocked '.catch()' section
         .catch(() => {
@@ -77,7 +85,9 @@ export const getSongById = (id) => {
 }
 
 export const createSong = (song) => {
-    return axios.post(`${REQUEST_URL}`, song)
+    return axios.post(`${REQUEST_URL}`, song, {
+        withCredentials: true,
+    })
         .then(response => response)
         // TODO Mocked '.catch()' section
         .catch(() => {
