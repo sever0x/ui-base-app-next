@@ -1,3 +1,14 @@
 {
-  "title": "This is the first page that visitors to your site will see, place all the information they need here"
+  "title": "This is the first page that visitors to your site will see, place all the information they need here",
+  "enter_artist_id": "Enter artist ID (optional)",
+  "enter_album_name": "Enter album name (optional)",
+  "deleting.success": "The song was successfully deleted",
+  "deleting.failure": "Uh... looks like there was an error :(",
+  "deleting.question": "Are you sure you want to delete this song?",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "deleting.confirm": "Confirm Delete",
+  "add_new_song": "Add new song",
+  "apply": "Apply",
+  "reset": "Reset"
 }
